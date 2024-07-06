@@ -149,5 +149,5 @@ EMAIL_HOST = 'smtp.your-email-provider.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'gideonlambride@gmail.com'
-EMAIL_HOST_PASSWORD = 'gideon0211tee'
+EMAIL_HOST_PASSWORD = '*******'
 DEFAULT_FROM_EMAIL = 'webmaster@your-domain.com'
