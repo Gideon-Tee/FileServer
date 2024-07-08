@@ -145,9 +145,8 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 #email backend configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.your-email-provider.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'gideonlambride@gmail.com'
-EMAIL_HOST_PASSWORD = 'gideon0211tee'
-DEFAULT_FROM_EMAIL = 'webmaster@your-domain.com'
+EMAIL_HOST_PASSWORD = ''

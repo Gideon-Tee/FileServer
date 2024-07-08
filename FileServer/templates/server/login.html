@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="row">
+        <h1 class="display-6 text-center mt-3">LOG IN</h1>
+        <div class="col-lg-6 mx-auto mt-3 border p-4">
+
+            <form action="" class="form" method="post">
+                {% csrf_token %}
+            
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control">
+                
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control">
+
+                <input type="submit" class="btn btn-secondary mt-3 w-100" value="Log in">
+                    
+            </form>
+            <small>No account? <a href="{% url 'signup' %}"><small>Register here</small></a></small><br>
+            <small class="float-end"><a href="">Forgot password?</a></small>
+        </div>
+    </div>
+{% endblock content %}
+    
