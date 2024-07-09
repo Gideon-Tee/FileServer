@@ -12,7 +12,7 @@ class SignUpForm(UserCreationForm):
         fields = ['email', 'password1', 'password2']
 
 
-class DocumentUploadForm(forms.Form):
+class DocumentUploadForm(forms.ModelForm):
 
     class Meta:
         model = Document
