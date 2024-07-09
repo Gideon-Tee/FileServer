@@ -17,3 +17,6 @@ class DocumentUploadForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ['title', 'description', 'file']
+
+class EmailSendForm(forms.Form):
+    recipient_email = forms.EmailField(label='Recipient Email', required=True)

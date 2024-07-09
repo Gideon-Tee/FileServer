@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, FileResponse, Http404
-from .forms import SignUpForm
+from django.http import JsonResponse, FileResponse, Http404
 from django.contrib.auth.models import auth
 from django.contrib import messages
-from .forms import DocumentUploadForm
+from django.core.mail import EmailMessage
+from .forms import DocumentUploadForm, SignUpForm, EmailSendForm
 from .models import Document
 from django.db.models import Q 
 # Create your views here.
@@ -29,6 +29,39 @@ def upload_document(request):
     else:
         form = DocumentUploadForm()
     return render(request, 'server/upload-document.html', {'form': form})
+
+
+def send_file_via_email(request, document_id):
+    document = get_object_or_404(Document, id=document_id)
+
+    if request.method == 'POST':
+        form = EmailSendForm(request.POST)
+        if form.is_valid():
+            recipient_email = form.cleaned_data['recipient_email']
+
+            # Create the email
+            email = EmailMessage(
+                subject=f"Document: {document.title}",
+                body="Please find the attached document.",
+                to=[recipient_email],
+            )
+
+            # Attach the file
+            email.attach_file(document.file.path)
+
+            # Send the email
+            email.send()
+            document.emails_sent += 1
+            document.save()
+            messages.success(request, 'Email sent successfully')
+            return redirect('index')
+        else:
+            messages.error(request, f'{form.errors}')
+            return redirect('send-file')
+    
+    form = EmailSendForm()
+
+    return render(request, 'server/send-mail.html', {'form': form, 'document': document})
 
 
 def download_file(request, document_id):

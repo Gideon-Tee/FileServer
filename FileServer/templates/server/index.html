@@ -5,24 +5,35 @@
     #file-list {
         max-height: 100vh;
         overflow-y: auto;
+        scroll-behavior: smooth;
     }
 </style>
 <div class="container">
     <div class="row">
         <h1 class="text-center">FILE SERVER</h1>
+        {% if messages %}
+                
+                {% for message in messages %}
+                    <p class="text-center">{{message}}</p>
+                {% endfor %}
+                    
+            {% endif %}
         
-        <div id="file-list" class="mx-auto col-lg-9 shadow-sm p-5">
+        <div id="file-list" class="mx-auto col-lg-9 vh-100 shadow-sm p-5">
             {% for document in documents %}
             <div class="my-4 border p-2">
                 <p class="">{{document.title | title}} <span class="float-end text-muted"><small>{{document.upload_date | timesince}} ago</small></span> </p>
                 <!-- <p class="">{{document.file.url}}</p> -->
                 <p>
                     <a href="{% url 'download' document.id %}">Download</a>
-                    
+                    <a href="{% url 'send-file' document.id %}" class="mx-3">Share via email</a>
                 </p>
 
-                <p class="">{{document.description}}</p>
-                    
+                <p class="">{{document.description}}
+                    <span class="float-end mt-2 border p-1">
+                        <small>{{document.downloads}} Downloads, {{document.emails_sent}} Shares </small>
+                    </span>
+                </p>
             </div>
             {% endfor %}
         </div>
