@@ -5,11 +5,16 @@ from django.contrib.auth.models import auth
 from django.contrib import messages
 from .forms import DocumentUploadForm
 from .models import Document
+from django.db.models import Q 
 # Create your views here.
 
 
 def index(request):
-    documents = Document.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') else ''
+
+    documents = Document.objects.filter(
+        Q(title__icontains=q) | Q(description__icontains=q)
+    )
     return render(request, 'server/index.html', {'documents': documents})
 
 
