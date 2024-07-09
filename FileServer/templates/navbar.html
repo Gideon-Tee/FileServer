@@ -16,7 +16,7 @@
     <div class="col-lg-2">
         
         {% if user.is_authenticated %}
-        User details <a href="{% url 'account_logout' %}" class="text-dark">Log out</a>
+        {{user.email }} <a href="{% url 'account_logout' %}" class="text-dark">Log out</a>
         {% else %}
         <div class="align-items-end justify-content-end">
             <a href="{% url 'account_login' %}" class="text-dark"><button class="btn btn-secondary">LOGIN</button></a> 

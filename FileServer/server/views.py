@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, FileResponse, Http404
 from .forms import SignUpForm
 from django.contrib.auth.models import auth
 from django.contrib import messages
@@ -30,6 +30,17 @@ def upload_document(request):
         form = DocumentUploadForm()
     return render(request, 'server/upload-document.html', {'form': form})
 
+
+def download_file(request, document_id):
+    document = get_object_or_404(Document, id=document_id)
+    file_path = document.file.path
+
+    try:
+        document.downloads += 1
+        document.save()
+        return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=document.file.name)
+    except FileNotFoundError:
+        raise Http404("File does not exist")
 
 def signup(request):
     form = SignUpForm()
