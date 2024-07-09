@@ -1,17 +1,14 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 
 {% block content %}
     <div class="row">
         <h1 class="display-6 text-center mt-3">REGISTER</h1>
         <div class="col-lg-6 mx-auto mt-3 border p-4">
 
-            <form action="" class="form" method="post">
+            <form action="{% url 'account_signup' %}" class="form" method="post">
                 {% csrf_token %}
-                
-                
-                
-                    
+      
                 {% for field in form %}
                     <div class="m-3">
                         <table class="table">
@@ -24,12 +21,13 @@
                         <small class="text-muted"><small>{{field.help_text | safe}}</small></small>
                     </div>
                 {% endfor %}
-                {{form.errors}}
+                <small class="text-danger fw-light">{{form.errors}}</small>
 
-                <input type="submit" class="btn btn-secondary w-100" value="Sign in">
+                <!-- <input type="submit" class="btn btn-secondary w-100" value="Sign in"> -->
+                <button type="submit" class="btn btn-secondary w-100">{% trans "Sign Up" %}</button>
                 
                     
-                <small>Already have an account? <a href="{% url 'login' %}">Log in</a></small>
+                <small>Already have an account? <a href="{% url 'account_login' %}">Log in</a></small>
                 
                     
             </form>

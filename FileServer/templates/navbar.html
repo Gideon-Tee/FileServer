@@ -16,11 +16,11 @@
     <div class="col-lg-2">
         
         {% if user.is_authenticated %}
-        User details <a href="{% url 'logout' %}" class="text-dark">Log out</a>
+        User details <a href="{% url 'account_logout' %}" class="text-dark">Log out</a>
         {% else %}
         <div class="align-items-end justify-content-end">
-            <a href="{% url 'login' %}" class="text-dark"><button class="btn btn-secondary">LOGIN</button></a> 
-            <a href="{% url 'signup' %}" class="text-dark"><button class="btn border-dark">REGISTER</button></a>
+            <a href="{% url 'account_login' %}" class="text-dark"><button class="btn btn-secondary">LOGIN</button></a> 
+            <a href="{% url 'account_signup' %}" class="text-dark"><button class="btn border-dark">REGISTER</button></a>
 
         </div>
 

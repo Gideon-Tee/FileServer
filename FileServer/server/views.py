@@ -13,11 +13,11 @@ def signup(request):
     form = SignUpForm()
 
     context = {'form': form}
-    return render(request, 'server/signup.html', context)
+    return render(request, 'account/signup.html', context)
 
 def login(request):
 
-    return render(request, 'server/login.html')
+    return render(request, 'account/login.html')
 
 def logout(request):
     
