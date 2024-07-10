@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            
+            {% if messages %}
+                
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+                    
+            {% endif %}
+                
+            <div class="col-lg-8 mx-auto">
+                <h6 class="display-6 text-center mb-4">Share `{{document.title}}` via email</h6>
+
+                <form action="{% url 'send-file' document.id %}" class="form" method="post">
+                    {% csrf_token %}
+                    {{form}}
+                    <input type="submit" class="btn btn-secondary" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
