@@ -161,3 +161,14 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.environ.get('EMAIL_ADDRESS')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.ERROR: 'alert-danger',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning'
+}

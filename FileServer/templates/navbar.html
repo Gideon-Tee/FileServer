@@ -1,30 +1,32 @@
-<div class="row pt-4 pl-3">
+<div class="row pt-4 px-3">
     <div class="col-lg-3">
         <a href="{% url 'index' %}" style="text-decoration: none; color: black;">
             
             LOGO - FILE SERVER
         </a>
     </div>
-    <div class="col-lg-7">
-        <div class="row w-50">
+    <div class="col-lg-6">
+        <div class="row w-100 mx-auto">
             <form action="" class="form" method="get">
                 <input type="text" name="q" class="form-control" placeholder="Search for a file...">
             </form>
 
         </div>
     </div>
-    <div class="col-lg-2">
-        
-        {% if user.is_authenticated %}
-        {{user.email }} <a href="{% url 'account_logout' %}" class="text-dark">Log out</a>
-        {% else %}
-        <div class="align-items-end justify-content-end">
-            <a href="{% url 'account_login' %}" class="text-dark"><button class="btn btn-secondary">LOGIN</button></a> 
-            <a href="{% url 'account_signup' %}" class="text-dark"><button class="btn border-dark">REGISTER</button></a>
+    <div class="col-lg-3">
+        <div class="float-end">
+            {% if user.is_authenticated %}
+            {{username }} || <a href="{% url 'account_logout' %}" class="text-dark">Log out</a>
+            {% else %}
+            <div class="align-items-end justify-content-end">
+                <a href="{% url 'account_login' %}" class="text-dark"><button class="btn btn-secondary">LOGIN</button></a> 
+                <a href="{% url 'account_signup' %}" class="text-dark"><button class="btn border-dark">REGISTER</button></a>
+    
+            </div>
+    
+            {% endif %}
 
         </div>
-
-        {% endif %}
         
     </div>
 </div>
