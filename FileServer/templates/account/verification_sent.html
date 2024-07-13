@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load allauth %}
+
+{% comment %}
+{% block head_title %}
+    {% trans "Verify Your Email Address" %}
+{% endblock head_title %}
+    
+{% endcomment %}
+    
+{% block content %}
+    <div class="main-container col-lg-7 p-4 mt-4 mx-auto">
+        <h3 class="theme-text my-4">Verify your Email Address</h3>
+
+        {% element p %}
+            {% blocktrans %}We have sent an email to you for verification. 
+            Follow the link provided to finalize the signup process.
+             If you do not see the verification email in your main inbox, check your spam folder.{% endblocktrans %}
+        {% endelement %}
+    </div>
+    
+{% endblock content %}

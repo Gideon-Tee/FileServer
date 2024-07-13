@@ -1,31 +1,27 @@
-<div class="row pt-4 pl-3">
-    <div class="col-lg-3">
-        <a href="{% url 'index' %}" style="text-decoration: none; color: black;">
-            
-            LOGO - FILE SERVER
-        </a>
-    </div>
-    <div class="col-lg-7">
-        <div class="row w-50">
-            <form action="" class="form" method="get">
-                <input type="text" name="q" class="form-control" placeholder="Search for a file...">
-            </form>
+<div class="header-container">
 
-        </div>
+    <h3 id="name"><a href="{% url 'index' %}" class="text-decoration-none text-white fw-bolder">File Server</a></h3>
+    
+    <div class="search-bar">
+        {% if user.is_authenticated %}
+        <form action="" method="get">
+            <input type="text" name="q" placeholder="Search for a file...">
+            
+        </form>
+        {% endif %}
     </div>
-    <div class="col-lg-2">
+
+    <div class="user-info">
         
         {% if user.is_authenticated %}
-        {{user.email }} <a href="{% url 'account_logout' %}" class="text-dark">Log out</a>
+        <span>{{username}} </span> | <a href="{% url 'account_logout' %}">Log out</a>
         {% else %}
-        <div class="align-items-end justify-content-end">
-            <a href="{% url 'account_login' %}" class="text-dark"><button class="btn btn-secondary">LOGIN</button></a> 
-            <a href="{% url 'account_signup' %}" class="text-dark"><button class="btn border-dark">REGISTER</button></a>
 
-        </div>
-
+        <a href="{% url 'account_login' %}" class="text-dark"><button class="btn btn-sm btn-light">LOGIN</button></a> 
+        <a href="{% url 'account_signup' %}" class="text-dark"><button class="btn btn-sm border-dark">REGISTER</button></a>
         {% endif %}
-        
+            
     </div>
+
 </div>
-<hr>
+

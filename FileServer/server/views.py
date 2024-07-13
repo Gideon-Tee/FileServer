@@ -3,21 +3,36 @@ from django.http import JsonResponse, FileResponse, Http404
 from django.contrib.auth.models import auth
 from django.contrib import messages
 from django.core.mail import EmailMessage
-from .forms import DocumentUploadForm, SignUpForm, EmailSendForm
+from django.contrib.auth.decorators import login_required
+from .forms import DocumentUploadForm, CustomSignUpForm, EmailSendForm
 from .models import Document
 from django.db.models import Q 
 # Create your views here.
 
-
+@login_required(login_url='account_login')
 def index(request):
     q = request.GET.get('q') if request.GET.get('q') else ''
-
+    username = get_username(request.user.email)
     documents = Document.objects.filter(
         Q(title__icontains=q) | Q(description__icontains=q)
     )
-    return render(request, 'server/index.html', {'documents': documents})
+    context = {
+        'documents': documents,
+        'username': username
+    }
+    return render(request, 'server/index.html', context)
+
+# Generate a username for the user using their email
+def get_username(email_address):
+    username = ''
+    for ch in email_address:
+        if ch == '@':
+            break
+        username += ch
+    return username
 
 
+@login_required(login_url='account_login')
 def upload_document(request):
     if request.method == 'POST':
         form = DocumentUploadForm(request.POST, request.FILES)
@@ -28,9 +43,14 @@ def upload_document(request):
 
     else:
         form = DocumentUploadForm()
-    return render(request, 'server/upload-document.html', {'form': form})
+    
+    context = {
+        'form': form,
+        'username': get_username(request.user.email)
+    }
+    return render(request, 'server/upload-document.html', context)
 
-
+@login_required(login_url='account_login')
 def send_file_via_email(request, document_id):
     document = get_object_or_404(Document, id=document_id)
 
@@ -42,7 +62,7 @@ def send_file_via_email(request, document_id):
             # Create the email
             email = EmailMessage(
                 subject=f"Document: {document.title}",
-                body="Please find the attached document.",
+                body="Please find the attached document, from Lizzy's FileServer.",
                 to=[recipient_email],
             )
 
@@ -60,10 +80,14 @@ def send_file_via_email(request, document_id):
             return redirect('send-file')
     
     form = EmailSendForm()
+    context = {
+        'form': form,
+        'document': document,
+        'username': get_username(request.user.email)
+    }
+    return render(request, 'server/send-mail.html', context)
 
-    return render(request, 'server/send-mail.html', {'form': form, 'document': document})
-
-
+@login_required(login_url='account_login')
 def download_file(request, document_id):
     document = get_object_or_404(Document, id=document_id)
     file_path = document.file.path
@@ -75,16 +99,8 @@ def download_file(request, document_id):
     except FileNotFoundError:
         raise Http404("File does not exist")
 
-def signup(request):
-    form = SignUpForm()
 
-    context = {'form': form}
-    return render(request, 'account/signup.html', context)
-
-def login(request):
-
-    return render(request, 'account/login.html')
-
+login_required(login_url='account_login')
 def logout(request):
-    
+    auth.logout(request)
     return redirect('index')

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load allauth i18n %}
+
+
+{% block content %}
+    <div class="main-container col-lg-6 col-9 p-4 mx-auto my-auto">
+        <h5 class="text-center">Are you sure you want to log out?</h5>
+        <div class="document-icons mt-5 w-50 mx-auto">
+            <a href="{% url 'index' %}"><button class="btn main-button">Cancel</button></a>
+            <a href="{% url 'logout' %}"><button class="btn btn-danger">Log Out</button></a>
+        </div>
+    </div>
+{% endblock content %}
+    

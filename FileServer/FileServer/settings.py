@@ -119,11 +119,18 @@ USE_I18N = True
 
 USE_TZ = True
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -131,13 +138,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-import os
-from dotenv import load_dotenv
-
-load_dotenv(os.path.join(BASE_DIR, '.env'))
-
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',  # Needed for Django admin
+    'django.contrib.auth.backends.ModelBackend',  
     'allauth.account.auth_backends.AuthenticationBackend',  # Needed for allauth
 )
 
@@ -151,6 +153,11 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+ACCOUNT_FORMS = {
+    'signup': 'server.forms.CustomSignUpForm',
+    'login': 'server.forms.CustomLoginForm',
+}
+
 #email backend configuration
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'server.backends.email_backend.EmailBackend'
@@ -161,3 +168,14 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.environ.get('EMAIL_ADDRESS')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.ERROR: 'alert-danger',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning'
+}

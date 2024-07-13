@@ -3,27 +3,26 @@
 
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            
-            {% if messages %}
+    
+        <div class="container">
+            <div class="row">
                 
-                {% for message in messages %}
-                    {{message}}
-                {% endfor %}
-                    
-            {% endif %}
-                
-            <div class="col-lg-8 mx-auto">
-                <h6 class="display-6 text-center mb-4">Share `{{document.title}}` via email</h6>
+               
+                <div class="main-container col-lg-8 mx-auto p-4">
+                    <h3 class="text-center mb-4">Share '{{document.title | title}}' via email</h3>
+    
+                    <form action="{% url 'send-file' document.id %}" class="form" method="post">
+                        {% csrf_token %}
+                        {{form}}
+                        <div class="row w-100 mt-5">
+                            <input type="submit" class="btn main-button w-50 mx-auto" value="Send">
 
-                <form action="{% url 'send-file' document.id %}" class="form" method="post">
-                    {% csrf_token %}
-                    {{form}}
-                    <input type="submit" class="btn btn-secondary" value="Send">
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+
+    
 {% endblock content %}
     

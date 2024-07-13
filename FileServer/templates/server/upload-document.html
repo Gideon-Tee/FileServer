@@ -2,18 +2,23 @@
 
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <h1 class="display-6 text-center fw-light my-3">Upload Document</h1>
-            <div class="col-lg-8 mx-auto border">
-                <form action="{% url 'upload' %}" method="post" class="form" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{form}}
-
-                    <input type="submit" class="btn btn-secondary w-100 mx-auto" value="Upload">
-                </form>
+    
+        <div class="container">
+            <div class="row">
+                <div class="main-container col-lg-8  mx-auto">
+                    <h2 class="theme-text text-center fw-bolder mt-3">Upload Document</h2>
+                    <form action="{% url 'upload' %}" method="post" class="form w-100 py-3" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form}}
+                        <div class="row w-100">
+                            <input type="submit" class="btn main-button w-50 mx-auto" value="Upload">
+    
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+
+    
 {% endblock content %}
     
