@@ -4,12 +4,12 @@ from django.contrib.auth.models import auth
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
-from .forms import DocumentUploadForm, SignUpForm, EmailSendForm
+from .forms import DocumentUploadForm, CustomSignUpForm, EmailSendForm
 from .models import Document
 from django.db.models import Q 
 # Create your views here.
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def index(request):
     q = request.GET.get('q') if request.GET.get('q') else ''
     username = get_username(request.user.email)
@@ -32,7 +32,7 @@ def get_username(email_address):
     return username
 
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def upload_document(request):
     if request.method == 'POST':
         form = DocumentUploadForm(request.POST, request.FILES)
@@ -50,7 +50,7 @@ def upload_document(request):
     }
     return render(request, 'server/upload-document.html', context)
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def send_file_via_email(request, document_id):
     document = get_object_or_404(Document, id=document_id)
 
@@ -87,7 +87,7 @@ def send_file_via_email(request, document_id):
     }
     return render(request, 'server/send-mail.html', context)
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def download_file(request, document_id):
     document = get_object_or_404(Document, id=document_id)
     file_path = document.file.path
@@ -99,29 +99,8 @@ def download_file(request, document_id):
     except FileNotFoundError:
         raise Http404("File does not exist")
 
-def signup(request):
-    form = SignUpForm()
 
-    context = {'form': form}
-    return render(request, 'account/signup.html', context)
-
-def login(request):
-    if request.user.is_authenticated:
-        return redirect('index')
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-
-        user = auth.authenticate(email=email, password=password)
-        if user is not None:
-            auth.login(request, user)
-            return redirect('index')
-        else:
-            messages.error(request, 'Invalid credentials')
-            return redirect('login')
-    return render(request, 'account/login.html')
-
-login_required(login_url='login')
+login_required(login_url='account_login')
 def logout(request):
-    
+    auth.logout(request)
     return redirect('index')

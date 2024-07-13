@@ -1,30 +1,35 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
     <div class="row">
-        <h1 class="display-6 text-center mt-3">REGISTER</h1>
-        <div class="col-lg-6 mx-auto mt-3 border p-4">
+        <div class="main-container col-10 col-lg-6 mx-auto mt-3 border p-4">
+            <h3 class="theme-text text-center mt-3">REGISTER</h3>
 
             <form action="{% url 'account_signup' %}" class="form" method="post">
                 {% csrf_token %}
-      
-                {% for field in form %}
-                    <div class="m-3">
-                        <table class="table">
-                            <tr>
-                                <td>{{field.label}}</td>
-                                <td>{{field}}</td>
-                            </tr>
-                        </table>
-
-                        <small class="text-muted"><small>{{field.help_text | safe}}</small></small>
-                    </div>
-                {% endfor %}
+                
+                <p class="">
+                    {{form.email.label_tag}} {{form.email}}
+                </p>
+                <p class="">
+                    {{form.password1.label_tag}}
+                    <input type="password" name="{{form.password1.name}}" class="form-control">
+                    <small class="text-muted"><small>{{form.password1.help_text | safe}}</small></small>
+                </p>
+                <p class="">
+                    {{form.password2.label_tag}}
+                    <input type="password" name="{{form.password2.name}}" class="form-control">
+                </p>
+            
+                    
+                
+                
                 <small class="text-danger fw-light">{{form.errors}}</small>
 
-                <!-- <input type="submit" class="btn btn-secondary w-100" value="Sign in"> -->
-                <button type="submit" class="btn btn-secondary w-100">{% trans "Sign Up" %}</button>
+                
+                <button type="submit" class="main-button  btn btn-secondary w-100">REGISTER</button>
                 
                     
                 <small>Already have an account? <a href="{% url 'account_login' %}">Log in</a></small>
