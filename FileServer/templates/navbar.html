@@ -1,6 +1,12 @@
+{% load static %}
 <div class="header-container">
 
-    <h3 id="name"><a href="{% url 'index' %}" class="text-decoration-none text-white fw-bolder">File Server</a></h3>
+    <h3 id="name">
+        <a href="{% url 'index' %}" class="text-decoration-none text-white fw-bolder">
+            <img src="{% static 'server/icons/documents-icon.png' %}" alt="logo" class="img" height="50" width="50">
+            File Server
+        </a>
+    </h3>
     
     <div class="search-bar">
         {% if user.is_authenticated %}
