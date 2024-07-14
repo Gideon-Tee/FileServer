@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3b=g=$817(hjl@rt^6^4#8sbbf^lx^_$@6jb=(2)9$*=s05=4i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lizzydocuments.pythonanywhere.com']
 
 SITE_ID = 1
 
