@@ -3,18 +3,26 @@
 {% block content %}
     <div class="main-container col-lg-10 mx-auto">
         <div class="document-list">
-            <div class="row w-100">
-                <div class="col-lg-10 mx-auto">
-                    <h2 class="theme-text text-center fw-bold">DOCUMENTS</h2>
+            <div class="row">
+                <div class="mx-auto">
+                    <h2 class="theme-text text-center fw-bold">
+                        DOCUMENTS
+                    
+                        {% if user.is_superuser %}
+                        <!-- <div class="col-lg-2"> -->
+                            <span>
+                                <a href="{% url 'upload' %}" class="mx-5">
+                                    <img src="{% static 'server/icons/add-icon2.png' %}" alt="" width="40px" height="40px" title="Upload document">
+                                </a>
+    
+                            </span>
+                                
+                            
+                        <!-- </div> -->
+                        {% endif %}
+                    </h2>
 
                 </div>
-                {% if user.is_superuser %}
-                <div class="col-lg-2">
-                    <a href="{% url 'upload' %}" class="float-end"><img src="{% static 'server/icons/add-icon.png' %}" alt="" width="35px" height="35px"></a>
-                        
-                    
-                </div>
-                {% endif %}
 
             </div>
             
