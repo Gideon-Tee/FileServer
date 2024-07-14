@@ -28,7 +28,7 @@
             
                 
             
-            {% for document in documents %}
+            {% for document in documents reversed %}
                 {% load custom_filters %}
 
                 <div class="row document-item mb-3 border p-3 shadow-sm">
@@ -44,7 +44,7 @@
                         <div class="document-icons">
                             <div>
                                 <a href="{% url 'download' document.id %}" class="" title="download">
-                                    <img src="{% static 'server/icons/download-icon.png' %}" alt="" width="40px" height="40px">
+                                    <img src="{% static 'server/icons/download-icon.png' %}" alt="download" width="40px" height="40px">
                                 </a><br>
                                 <span><small><small class="icon-text text-muted text-decoration-none">Download</small></small></span>
                                 <br>
@@ -56,7 +56,7 @@
                             
                             <div>
                                 <a href="{% url 'send-file' document.id %}" class="share" title="share">
-                                    <img src="{% static 'server/icons/email-icon.png' %}" alt="" width="35px" height="35px">
+                                    <img src="{% static 'server/icons/email-icon.png' %}" alt="share" width="35px" height="35px">
                                 </a><br>
                                 <span><small><small class="icon-text text-muted text-decoration-none ">Share</small></small></span>
                                 <br>
