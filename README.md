@@ -56,7 +56,12 @@ Default Superuser details
 **A little note**: The page is best rendered on a laptop or a larger screen than that of a mobile phone
 
 
+## Entity-Relationship Diagram of Database
+
+[er-diagram](https://github.com/user-attachments/assets/eb1b08fa-b0ed-4a9b-a57b-87db3019b322)
+
 ## Installation
+
 
 1. **Clone the repository:**
    ```bash
