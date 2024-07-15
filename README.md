@@ -58,7 +58,7 @@ Default Superuser details
 
 ## Entity-Relationship Diagram of Database
 
-[er-diagram](https://github.com/user-attachments/assets/eb1b08fa-b0ed-4a9b-a57b-87db3019b322)
+![er-diagram](https://github.com/user-attachments/assets/eb1b08fa-b0ed-4a9b-a57b-87db3019b322)
 
 ## Installation
 
