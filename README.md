@@ -15,19 +15,22 @@ This project is a file server application built using Django. It allows users to
 ## Prerequisites
 
 - Python 3.8+
-- Django 3.2+
+- Django 4.2+
 - pip (Python package installer)
 
 ## Usage
 
 ### User Authentication
-1. **Sign Up**
+1. **Sign Up:**
+   
   Users sign up with an email address and password. Email verification is required
 
-2. **Log In**
+3. **Log In:**
+   
    Users log in with their registered email and password
 
-3. **Password Reset**
+4. **Password Reset:**
+   
    Users can reset their password through their email addresses
 
 ### File Management
@@ -44,10 +47,11 @@ This project is a file server application built using Django. It allows users to
 
 Default Superuser details
 
-email : `gideonlambride@gmail.com`
-password : `admin`
+-email : `gideonlambride@gmail.com`
 
-link : https://lizzydocuments.pythonanywhere.com
+-password : `admin`
+
+-link : https://lizzydocuments.pythonanywhere.com
 
 
 ## Installation
