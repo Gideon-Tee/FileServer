@@ -53,6 +53,8 @@ Default Superuser details
 
 -link : https://lizzydocuments.pythonanywhere.com
 
+**A little note**: The page is best rendered on a laptop or a larger screen than that of a mobile phone
+
 
 ## Installation
 
