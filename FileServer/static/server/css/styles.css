@@ -25,7 +25,7 @@ header {
 }
 
 .header-container {
-    
+
     align-items: center;
     max-width: 100%;
     margin: 0 auto;
@@ -73,7 +73,7 @@ main {
 
 .document-list {
     padding: 20px;
-    max-height: 100vh;
+    max-height: 80vh;
     overflow-y: auto;
 
 }
