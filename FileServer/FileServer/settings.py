@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
+import os
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -83,11 +85,14 @@ AUTH_USER_MODEL = 'custom_user.User'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fileserver',
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -119,7 +124,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-import os
+
 from dotenv import load_dotenv
 
 load_dotenv(os.path.join(BASE_DIR, '.env'))
